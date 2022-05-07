@@ -27,7 +27,7 @@ const Chat = ({ name, message, getTheFirstFiveWords }) => {
         <div title={name} className={styles.senderName}>{name}</div>
         <div className={styles.message}>
           {message.messagesText.split(" ").length > 5
-            ? getTheFirstFiveWords(message) + "..."
+            ? message.messagesText.length >= 25 ? message.messagesText.slice(0, 25) + "..." : getTheFirstFiveWords(message) + "..."
             : message.messagesText}
         </div>
       </div>

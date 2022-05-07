@@ -8,9 +8,11 @@ import { GET_MESSAGES } from "./libs/client/gql";
 function App() {
   let { data, loading, error } = useQuery(GET_MESSAGES);
   return (
-    <div className="container">
-      <LeftSide messages={data?.messages} />
-      <RightSide />
+    <div className="reallyContainer">
+      <div className="container">
+        <LeftSide messages={data?.messages} />
+        <RightSide />
+      </div>
     </div>
   );
 }

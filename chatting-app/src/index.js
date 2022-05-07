@@ -3,13 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import { ApolloProvider } from "@apollo/client";
-import { client } from "./libs/client/index"
+import { client } from "./libs/client/index";
+import { theme } from "./chakraUiCustomStyle/theme";
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <ChakraProvider resetCSS theme={theme}>
+        <App />
+      </ChakraProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")

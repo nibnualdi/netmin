@@ -4,13 +4,22 @@ import styles from "./LeftSide.module.css";
 import add from "../../assets/images/icons/add.svg";
 import search from "../../assets/images/icons/search.svg";
 
+// components
 import Chat from "../Chat";
+import PopUp from "../PopUp";
+import { useEffect, useState } from "react";
 
 const LeftSide = ({ messages }) => {
-
+  // console.log(messages)
   // variable friends is for keep the friends name from the data given (props messages)
   let friends = [];
   let alreadyShown = [];
+  let [messagesFound, setMessagesFound] = useState([])
+  let [inputSearch, setInputSearch] = useState("")
+
+  useEffect(()=>{
+    console.log(messagesFound)
+  },[messagesFound])
 
   // this is for add friend name to variable friends from the data given (props messages)
   // if there are match friend name then return the first found friend name and return null for the rest of it
@@ -32,11 +41,24 @@ const LeftSide = ({ messages }) => {
     return theFirstFiveWords;
   };
 
+  const handleSearch = (e) => {
+    let messagesFound = []
+    setInputSearch(e.target.value.toLowerCase())
+    messages.forEach((message)=>{
+      if(message.messagesText.toLowerCase().includes(inputSearch)) {
+        messagesFound.push(message)
+      }
+    })
+    setMessagesFound(messagesFound)
+  }
+
   return (
     <section className={styles.leftSide}>
       <section className={styles.header}>
-        <img src={add} alt="add-icons" className={styles.addIcon} />
-        <img src={search} alt="search-icons" className={styles.searchIcon} />
+        <PopUp icon={add} placeHolder="Message to..." name="addIcon" />
+        <PopUp icon={search} placeHolder="Search..." name="searchIcon" onChange={handleSearch} data={messagesFound} inputSearch={inputSearch}  />
+        {/* <img src={add} alt="add-icons" className={styles.addIcon} /> */}
+        {/* <img src={search} alt="search-icons" className={styles.searchIcon} /> */}
       </section>
       <section className={styles.chatsContainer}>
         {/* if there are messages then show the data, else show loading */}
