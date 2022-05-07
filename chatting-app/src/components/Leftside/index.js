@@ -14,12 +14,12 @@ const LeftSide = ({ messages }) => {
   // variable friends is for keep the friends name from the data given (props messages)
   let friends = [];
   let alreadyShown = [];
-  let [messagesFound, setMessagesFound] = useState([])
-  let [inputSearch, setInputSearch] = useState("")
+  let [messagesFound, setMessagesFound] = useState([]);
+  let [inputSearch, setInputSearch] = useState("");
 
-  useEffect(()=>{
-    console.log(messagesFound)
-  },[messagesFound])
+  // useEffect(()=>{
+  //   console.log(messagesFound)
+  // },[messagesFound])
 
   // this is for add friend name to variable friends from the data given (props messages)
   // if there are match friend name then return the first found friend name and return null for the rest of it
@@ -42,21 +42,27 @@ const LeftSide = ({ messages }) => {
   };
 
   const handleSearch = (e) => {
-    let messagesFound = []
-    setInputSearch(e.target.value.toLowerCase())
-    messages.forEach((message)=>{
-      if(message.messagesText.toLowerCase().includes(inputSearch)) {
-        messagesFound.push(message)
+    setInputSearch(e.target.value.toLowerCase());
+    setMessagesFound([]);
+    messages.forEach((message) => {
+      if (message.messagesText.toLowerCase().includes(e.target.value.toLowerCase())) {
+        setMessagesFound((oldArray) => [...oldArray, message]);
       }
-    })
-    setMessagesFound(messagesFound)
-  }
+    });
+  };
 
   return (
     <section className={styles.leftSide}>
       <section className={styles.header}>
         <PopUp icon={add} placeHolder="Message to..." name="addIcon" />
-        <PopUp icon={search} placeHolder="Search..." name="searchIcon" onChange={handleSearch} data={messagesFound} inputSearch={inputSearch}  />
+        <PopUp
+          icon={search}
+          placeHolder="Search..."
+          name="searchIcon"
+          onChange={handleSearch}
+          data={messagesFound}
+          inputSearch={inputSearch}
+        />
         {/* <img src={add} alt="add-icons" className={styles.addIcon} /> */}
         {/* <img src={search} alt="search-icons" className={styles.searchIcon} /> */}
       </section>

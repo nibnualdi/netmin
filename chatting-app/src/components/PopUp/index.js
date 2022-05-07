@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -32,7 +32,6 @@ function PopUp({ icon, placeHolder, name, onChange, data, inputSearch }) {
             />
           </DrawerHeader>
 
-          {/* console.log(message.messagesText.split(" ")) */}
           <DrawerBody className={styles.drawerBody}>
             {data?.map((message, index) => {
               const firstIndexSelectedWord = message.messagesText.toLowerCase().search(inputSearch);
