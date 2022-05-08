@@ -10,17 +10,20 @@ import {
   useDisclosure,
   Button,
   Input,
+  Tooltip,
 } from "@chakra-ui/react";
 
 import styles from "./PopUp.module.css";
 
-function PopUp({ icon, placeHolder, name, onChange, data, inputSearch }) {
+function PopUp({ icon, placeHolder, name, onChange, BodyComponent }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
   return (
     <>
+      <Tooltip label={placeHolder} fontSize='md'>
       <img src={icon} alt={name} className={styles[name]} ref={btnRef} onClick={onOpen} />
+      </Tooltip>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
         <DrawerContent className={styles.drawerContent}>
@@ -32,36 +35,7 @@ function PopUp({ icon, placeHolder, name, onChange, data, inputSearch }) {
             />
           </DrawerHeader>
 
-          <DrawerBody className={styles.drawerBody}>
-            {data?.map((message, index) => {
-              const firstIndexSelectedWord = message.messagesText.toLowerCase().search(inputSearch);
-              const firstSelectedWord = message.messagesText.toLowerCase().match(inputSearch);
-
-              return (
-                <div key={message.id} className={styles.gakTau}>
-                  {message.friend.name === "admin" ? (
-                    <h1 className={styles.senderName}>{message.user.name}</h1>
-                  ) : (
-                    <h1 className={styles.senderName}>{message.friend.name}</h1>
-                  )}
-                  {firstIndexSelectedWord !== -1 && (
-                    <div className={styles.messagesText} style={{ position: "relative" }}>
-                      {message.messagesText}
-                      <p
-                        className={styles.messagesText}
-                        style={{ position: "absolute", top: 0, left: 0, display: "inline-block" }}
-                      >
-                        {message.messagesText.substr(0, firstIndexSelectedWord)}
-                        <span style={{ backgroundColor: "#5f5f5f", display: "inline-block" }}>
-                          {firstSelectedWord}
-                        </span>
-                      </p>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </DrawerBody>
+          <DrawerBody className={styles.drawerBody}>{BodyComponent}</DrawerBody>
 
           {/* <DrawerFooter>
             <Button variant="outline" mr={3} onClick={onClose}>

@@ -10,7 +10,7 @@ const Chat = ({ name, message, getTheFirstFiveWords }) => {
       e.classList.remove(`${styles.selected}`);
     });
     e.currentTarget.classList.toggle(`${styles.selected}`);
-    console.log(e.currentTarget.children[1].children[0].getAttribute("title"))
+    console.log(e.currentTarget.children[1].children[0].getAttribute("title"));
   };
 
   return (
@@ -24,10 +24,14 @@ const Chat = ({ name, message, getTheFirstFiveWords }) => {
     >
       <div className={styles.profileInitial}>{name[0].toUpperCase()}</div>
       <div className={styles.messageContainer}>
-        <div title={name} className={styles.senderName}>{name}</div>
+        <div title={name} className={styles.senderName}>
+          {name}
+        </div>
         <div className={styles.message}>
           {message.messagesText.split(" ").length > 5
-            ? message.messagesText.length >= 25 ? message.messagesText.slice(0, 25) + "..." : getTheFirstFiveWords(message) + "..."
+            ? message.messagesText.length >= 25
+              ? message.messagesText.slice(0, 25) + "..."
+              : getTheFirstFiveWords(message) + "..."
             : message.messagesText}
         </div>
       </div>

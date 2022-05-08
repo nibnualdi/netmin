@@ -42,17 +42,3 @@
 .drawerBody {
   padding: 0;
 }
-
-.gakTau {
-  border-bottom: 1px solid #5f5f5f;
-  padding: 15px;
-}
-
-.senderName {
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.messagesText {
-  font-size: 15px;
-}
