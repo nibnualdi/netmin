@@ -14,7 +14,7 @@ import { useQuery } from "@apollo/client";
 import { GET_USERS } from "../../libs/client/gql";
 import AddPopUpBody from "../AddPopUpBody";
 
-const LeftSide = ({ messages }) => {
+const LeftSide = ({ messages, setGetName, username }) => {
   let [usersFound, setUsersFound] = useState([]);
   let { data: users, loading: loadingUsers, error: errorUsers } = useQuery(GET_USERS);
 
@@ -23,10 +23,6 @@ const LeftSide = ({ messages }) => {
   let alreadyShown = [];
   let [messagesFound, setMessagesFound] = useState([]);
   let [inputSearch, setInputSearch] = useState("");
-
-  // useEffect(() => {
-  //   console.log(usersFound);
-  // }, [usersFound]);
 
   // this is for add friend name to variable friends from the data given (props messages)
   // if there are match friend name then return the first found friend name and return null for the rest of it
@@ -80,7 +76,7 @@ const LeftSide = ({ messages }) => {
           users={users?.users}
           inputSearch={inputSearch}
           onChange={handleAddUsers}
-          BodyComponent={<AddPopUpBody data={usersFound}/>}
+          BodyComponent={<AddPopUpBody username={username} data={usersFound} />}
         />
 
         <PopUp
@@ -88,17 +84,19 @@ const LeftSide = ({ messages }) => {
           placeHolder="Search..."
           name="searchIcon"
           onChange={handleSearch}
-          BodyComponent={<SearchPopUpBody data={messagesFound} inputSearch={inputSearch} />}
+          BodyComponent={
+            <SearchPopUpBody username={username} data={messagesFound} inputSearch={inputSearch} />
+          }
         />
       </section>
       <section className={styles.chatsContainer}>
         {/* if there are messages then show the data, else show loading */}
-        {messages?.length > 0 ? (
+        {messages?.length > 0 &&
           messages?.map((message, index) => {
             {
               /* if friend name equals user name and if the index of current message (teman admin ke admin) smaller than message admin to friend, then show the message admin to friend and friend name */
             }
-            if (message.friend.name === "admin") {
+            if (message.friend.name === username) {
               let indexOfAdminMessagetoFriend = messages.findIndex(
                 (e) => e.friend.name === message.user.name
               );
@@ -111,6 +109,7 @@ const LeftSide = ({ messages }) => {
                       name={message.user.name}
                       message={message}
                       getTheFirstFiveWords={getTheFirstFiveWords}
+                      setGetName={setGetName}
                     />
                   </div>
                 );
@@ -127,14 +126,12 @@ const LeftSide = ({ messages }) => {
                     name={message.friend.name}
                     message={message}
                     getTheFirstFiveWords={getTheFirstFiveWords}
+                    setGetName={setGetName}
                   />
                 </div>
               );
             }
-          })
-        ) : (
-          <p>Loading</p>
-        )}
+          })}
       </section>
     </section>
   );

@@ -1,15 +1,15 @@
 import styles from "./SearchPopUpBody.module.css";
 
-const SearchPopUpBody = ({ data, inputSearch }) => {
+const SearchPopUpBody = ({ username, data, inputSearch }) => {
   return (
     <>
-      {data?.map((message, index) => {
+      {data?.map((message) => {
         const firstIndexSelectedWord = message.messagesText.toLowerCase().search(inputSearch);
         const firstSelectedWord = message.messagesText.toLowerCase().match(inputSearch);
 
         return (
           <div key={message.id} className={styles.container}>
-            {message.friend.name === "admin" ? (
+            {message.friend.name === username ? (
               <h1 className={styles.senderName}>{message.user.name}</h1>
             ) : (
               <h1 className={styles.senderName}>{message.friend.name}</h1>

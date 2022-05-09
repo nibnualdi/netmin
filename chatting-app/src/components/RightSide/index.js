@@ -1,238 +1,29 @@
-import styles from "./RightSide.module.css"
+import styles from "./RightSide.module.css";
 
 import send from "../../assets/images/icons/send.svg";
+import { RightHeader } from "../RightHeader";
+import { useEffect } from "react";
+import { Messages } from "../Messages";
 
-function RightSide() {
+function RightSide({ username, data, getName }) {
+  let dataSingleUser = [];
+
+  data?.forEach((eachData) => {
+    if (eachData.friend.name === getName) return (dataSingleUser = [...dataSingleUser, eachData]);
+    if (eachData.friend.name === username && eachData.user.name === getName)
+      return (dataSingleUser = [...dataSingleUser, eachData]);
+  });
+
+  useEffect(() => {
+    console.log(dataSingleUser);
+  }, [dataSingleUser]);
+
   return (
     <section className={styles.rightSide}>
-      <section className={styles.header}>
-        <div className={styles.profile}>
-          <div className={styles.profileInitial}>E</div>
-          <span>
-            <div className={styles.name}>Elon Musk</div>
-            <div className={styles.isTyping}>is typing</div>
-          </span>
-        </div>
-      </section>
+      <RightHeader getName={getName} />
 
       <section className={styles.messagesContainer}>
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Lu sama bejos kenapa lon?
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Denger2 lu sama bejos berantem.
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Waktu ketemu si bejos gw diledekin gara2 peringkat gw turun, mentang2 dia yang juara
-            satu, padahal dia cuma jualan sembako
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            oh...
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Nu, mau saham twitter gk?
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Pagi lon...
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Lu sama bejos kenapa lon?
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Denger2 lu sama bejos berantem.
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Waktu ketemu si bejos gw diledekin gara2 peringkat gw turun, mentang2 dia yang juara
-            satu, padahal dia cuma jualan sembako
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            oh...
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Nu, mau saham twitter gk?
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Pagi lon...
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Lu sama bejos kenapa lon?
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Denger2 lu sama bejos berantem.
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Waktu ketemu si bejos gw diledekin gara2 peringkat gw turun, mentang2 dia yang juara
-            satu, padahal dia cuma jualan sembako
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            oh...
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Nu, mau saham twitter gk?
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Pagi lon...
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Lu sama bejos kenapa lon?
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Denger2 lu sama bejos berantem.
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Waktu ketemu si bejos gw diledekin gara2 peringkat gw turun, mentang2 dia yang juara
-            satu, padahal dia cuma jualan sembako
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            oh...
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Nu, mau saham twitter gk?
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Pagi lon...
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Lu sama bejos kenapa lon?
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Denger2 lu sama bejos berantem.
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Waktu ketemu si bejos gw diledekin gara2 peringkat gw turun, mentang2 dia yang juara
-            satu, padahal dia cuma jualan sembako
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            oh...
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Nu, mau saham twitter gk?
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Pagi lon...
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Lu sama bejos kenapa lon?
-          </div>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            Denger2 lu sama bejos berantem.
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Waktu ketemu si bejos gw diledekin gara2 peringkat gw turun, mentang2 dia yang juara
-            satu, padahal dia cuma jualan sembako
-          </div>
-        </div>
-
-        <div className={styles.messagesFromUser}>
-          <div className={styles.messageFromUser}>
-            <div className={styles.tail} />
-            oh...
-          </div>
-        </div>
-
-        <div className={styles.messagesFromFriend}>
-          <div className={styles.messageFromFriend}>
-            <div className={styles.tail} />
-            Nu, mau saham twitter gk?
-          </div>
-        </div>
+        <Messages username={username} messages={dataSingleUser} />
       </section>
 
       <section className={styles.inputMessageContainer}>

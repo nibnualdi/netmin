@@ -11,15 +11,15 @@ export const GET_USERS = gql`
 `;
 
 export const GET_MESSAGES = gql`
-  query AllMessages {
+  query AllMessages($user: String!) {
     messages(
       where: {
         _or: [
-          { user: { email: { _eq: "admin@email.com" } } }
-          { friend: { name: { _eq: "admin" } } }
+          { user: { name: { _eq: $user } } }
+          { friend: { name: { _eq: $user } } }
         ]
       }
-      order_by: { createdAt: desc }
+      order_by: { createdAt: asc }
     ) {
       user {
         name
