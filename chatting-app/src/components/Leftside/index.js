@@ -90,20 +90,11 @@ const LeftSide = ({ messages, setGetName, username }) => {
         />
       </section>
       <section className={styles.chatsContainer}>
-        {/* if there are messages then show the data, else show loading */}
         {messages?.length > 0 &&
           messages?.map((message, index) => {
-            {
-              /* if friend name equals user name and if the index of current message (teman admin ke admin) smaller than message admin to friend, then show the message admin to friend and friend name */
-            }
-            if (message.friend.name === username) {
-              let indexOfAdminMessagetoFriend = messages.findIndex(
-                (e) => e.friend.name === message.user.name
-              );
-
-              if (messages.indexOf(message) < indexOfAdminMessagetoFriend) {
-                alreadyShown = [...alreadyShown, message.user.name];
-                return (
+            
+           
+                {/* return (
                   <div key={message.id}>
                     <Chat
                       name={message.user.name}
@@ -112,14 +103,9 @@ const LeftSide = ({ messages, setGetName, username }) => {
                       setGetName={setGetName}
                     />
                   </div>
-                );
-              }
-            }
-
-            {
-              /* show the data according to index of variable friends */
-            }
-            if (friends[index] !== null && !alreadyShown.includes(friends[index])) {
+                ); */}
+              
+            if (friends[index] !== null && friends[index] !== username && !alreadyShown.includes(friends[index])) {
               return (
                 <div key={message.id}>
                   <Chat
