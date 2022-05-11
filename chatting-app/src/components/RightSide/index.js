@@ -1,9 +1,10 @@
 import styles from "./RightSide.module.css";
 
-import send from "../../assets/images/icons/send.svg";
+// import send from "../../assets/images/icons/send.svg";
 import { RightHeader } from "../RightHeader";
 import { useEffect } from "react";
 import { Messages } from "../Messages";
+import { InputMessage } from "../InputMessage";
 
 function RightSide({ username, data, getName }) {
   let dataSingleUser = [];
@@ -14,9 +15,9 @@ function RightSide({ username, data, getName }) {
       return (dataSingleUser = [...dataSingleUser, eachData]);
   });
 
-  useEffect(() => {
-    console.log(dataSingleUser);
-  }, [dataSingleUser]);
+  // useEffect(() => {
+  //   console.log(sortedActivities);
+  // }, [sortedActivities]);
 
   return (
     <section className={styles.rightSide}>
@@ -27,10 +28,7 @@ function RightSide({ username, data, getName }) {
       </section>
 
       <section className={styles.inputMessageContainer}>
-        <input type="text" placeholder="Message" className={styles.inputMessage} />
-        <button type="submit">
-          <img src={send} alt="" />
-        </button>
+        <InputMessage data={data} getName={getName} />
       </section>
     </section>
   );

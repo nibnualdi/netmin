@@ -9,7 +9,7 @@ export const Messages = ({ username, messages }) => {
             {message.user.name === username ? (
               <div className={styles.messagesFromUser}>
                 <div className={styles.messageFromUser}>
-                {message.createdAt}
+                {/* {message.createdAt} */}
                   <div className={styles.tail} />
                   {message.messagesText}
                 </div>
@@ -17,7 +17,7 @@ export const Messages = ({ username, messages }) => {
             ) : (
               <div className={styles.messagesFromFriend}>
                 <div className={styles.messageFromFriend}>
-                {message.createdAt}
+                {/* {message.createdAt} */}
                   <div className={styles.tail} />
                   {message.messagesText}
                 </div>

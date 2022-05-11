@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import { ApolloProvider } from "@apollo/client";
-import { client } from "./libs/client/index";
+import client from "./libs/client/index";
 import { theme } from "./chakraUiCustomStyle/theme";
 
 ReactDOM.render(

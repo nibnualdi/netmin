@@ -10,13 +10,13 @@ import PopUp from "../PopUp";
 import SearchPopUpBody from "../SearchPopUpBody";
 
 import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useSubscription } from "@apollo/client";
 import { GET_USERS } from "../../libs/client/gql";
 import AddPopUpBody from "../AddPopUpBody";
 
 const LeftSide = ({ messages, setGetName, username }) => {
   let [usersFound, setUsersFound] = useState([]);
-  let { data: users, loading: loadingUsers, error: errorUsers } = useQuery(GET_USERS);
+  let { data: users, loading: loadingUsers, error: errorUsers } = useSubscription(GET_USERS);
 
   // variable friends is for keep the friends name from the data given (props messages)
   let friends = [];
