@@ -1,11 +1,5 @@
 import styles from "./LoginPage.module.css";
-import {
-  Button,
-  CircularProgress,
-  FormControl,
-  Input,
-  useToast,
-} from "@chakra-ui/react";
+import { Button, CircularProgress, FormControl, Input, useToast } from "@chakra-ui/react";
 import chating from "../../assets/images/chating.svg";
 
 import { useLazyQuery } from "@apollo/client";
@@ -15,11 +9,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { Helmet } from "react-helmet";
 
 const LoginPage = () => {
   let [user, setUser] = useState({ email: "", password: "" });
   let [getUSer, { data, loading, error }] = useLazyQuery(GET_USER);
-  let [alreadyLoad, setAlreadyLoad] = useState(false)
+  let [alreadyLoad, setAlreadyLoad] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -34,8 +29,8 @@ const LoginPage = () => {
         isClosable: true,
       });
       navigate(`/home:${data.users[0].name}`);
-    } 
-    if(data?.users.length === 0 && alreadyLoad) {
+    }
+    if (data?.users.length === 0 && alreadyLoad) {
       toast({
         title: "Failed.",
         description: "There is no match account.",
@@ -46,9 +41,9 @@ const LoginPage = () => {
     }
   }, [data]);
 
-  useEffect(()=>{
-    setAlreadyLoad(true)
-  }, [loading])
+  useEffect(() => {
+    setAlreadyLoad(true);
+  }, [loading]);
 
   const handleInput = (e) => {
     if (e.target.id === "email") {
@@ -65,52 +60,58 @@ const LoginPage = () => {
   };
 
   return (
-    <form
-      className={styles.container}
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
-      <FormControl className={styles.form}>
-        <div className={styles.logoContainer}>
-          <img src={chating} alt="logo" className={styles.logo} />
-          <h1 className={styles.logIn}>Log in</h1>
-          <p className={styles.desc}>enjoy your time with friends</p>
-        </div>
-        <span className={styles.line} />
-        <div className={styles.formContainer}>
-          <Input
-            id="email"
-            type="email"
-            placeholder="Email"
-            className={styles.input}
-            onChange={(e) => {
-              handleInput(e);
-            }}
-          />
+    <>
+      <Helmet>
+        <title>netmin | Login Page</title>
+      </Helmet>
 
-          <Input
-            id="password"
-            type="password"
-            placeholder="Password"
-            className={styles.input}
-            onChange={(e) => {
-              handleInput(e);
-            }}
-          />
-          {loading ? (
-            <CircularProgress isIndeterminate color="teal.300" size="30px" />
-          ) : (
-            <Button type="submit" className={styles.button}>
-              Login
-            </Button>
-          )}
-          <Link to="/signup">
-            <p className={styles.toSignUp}>Have not an account yet?</p>
-          </Link>
-        </div>
-      </FormControl>
-    </form>
+      <form
+        className={styles.container}
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <FormControl className={styles.form}>
+          <div className={styles.logoContainer}>
+            <img src={chating} alt="logo" className={styles.logo} />
+            <h1 className={styles.logIn}>Log in</h1>
+            <p className={styles.desc}>enjoy your time with friends</p>
+          </div>
+          <span className={styles.line} />
+          <div className={styles.formContainer}>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Email"
+              className={styles.input}
+              onChange={(e) => {
+                handleInput(e);
+              }}
+            />
+
+            <Input
+              id="password"
+              type="password"
+              placeholder="Password"
+              className={styles.input}
+              onChange={(e) => {
+                handleInput(e);
+              }}
+            />
+            {loading ? (
+              <CircularProgress isIndeterminate color="teal.300" size="30px" />
+            ) : (
+              <Button type="submit" className={styles.button}>
+                Login
+              </Button>
+            )}
+            <Link to="/signup">
+              <p className={styles.toSignUp}>Have not an account yet?</p>
+            </Link>
+          </div>
+        </FormControl>
+      </form>
+    </>
   );
 };
 

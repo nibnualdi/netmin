@@ -1,13 +1,9 @@
 import { useLazyQuery, useMutation } from "@apollo/client";
 import {
-  Alert,
-  AlertIcon,
   Button,
   CircularProgress,
   FormControl,
-  FormLabel,
   Input,
-  Stack,
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -16,6 +12,7 @@ import { CREATE_NEW_USER, GET_USER_SIGN_UP_VALIDATION } from "../../libs/client/
 import { v4 as uuidv4 } from "uuid";
 import styles from "./SignUpPage.module.css";
 import chating from "../../assets/images/chating.svg";
+import { Helmet } from "react-helmet";
 
 const SignUpPage = () => {
   const uuid = uuidv4();
@@ -91,62 +88,68 @@ const SignUpPage = () => {
   };
 
   return (
-    <form
-      className={styles.container}
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
-      <FormControl className={styles.form}>
-        <div className={styles.logoContainer}>
-          <img src={chating} alt="logo" className={styles.logo} />
-          <h1 className={styles.signUp}>Sign Up</h1>
-          <p className={styles.desc}>create an account</p>
-        </div>
-        <span className={styles.line} />
-        <div className={styles.formContainer}>
-          <Input
-            id="name"
-            type="text"
-            placeholder="Name"
-            className={styles.input}
-            onChange={(e) => {
-              handleInput(e);
-            }}
-          />
+    <>
+      <Helmet>
+        <title>netmin | Signup Page</title>
+      </Helmet>
 
-          <Input
-            id="email"
-            type="email"
-            placeholder="Email"
-            className={styles.input}
-            onChange={(e) => {
-              handleInput(e);
-            }}
-          />
+      <form
+        className={styles.container}
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <FormControl className={styles.form}>
+          <div className={styles.logoContainer}>
+            <img src={chating} alt="logo" className={styles.logo} />
+            <h1 className={styles.signUp}>Sign Up</h1>
+            <p className={styles.desc}>create an account</p>
+          </div>
+          <span className={styles.line} />
+          <div className={styles.formContainer}>
+            <Input
+              id="name"
+              type="text"
+              placeholder="Name"
+              className={styles.input}
+              onChange={(e) => {
+                handleInput(e);
+              }}
+            />
 
-          <Input
-            id="password"
-            type="password"
-            placeholder="Password"
-            className={styles.input}
-            onChange={(e) => {
-              handleInput(e);
-            }}
-          />
-          {loading ? (
-            <CircularProgress isIndeterminate color="teal.300" size="30px" />
-          ) : (
-            <Button type="submit" className={styles.button}>
-              Create
-            </Button>
-          )}
-          <Link to="/">
-            <p className={styles.toLogIn}>already have an account?</p>
-          </Link>
-        </div>
-      </FormControl>
-    </form>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Email"
+              className={styles.input}
+              onChange={(e) => {
+                handleInput(e);
+              }}
+            />
+
+            <Input
+              id="password"
+              type="password"
+              placeholder="Password"
+              className={styles.input}
+              onChange={(e) => {
+                handleInput(e);
+              }}
+            />
+            {loading ? (
+              <CircularProgress isIndeterminate color="teal.300" size="30px" />
+            ) : (
+              <Button type="submit" className={styles.button}>
+                Create
+              </Button>
+            )}
+            <Link to="/">
+              <p className={styles.toLogIn}>already have an account?</p>
+            </Link>
+          </div>
+        </FormControl>
+      </form>
+    </>
   );
 };
 

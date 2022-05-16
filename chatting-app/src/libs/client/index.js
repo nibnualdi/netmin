@@ -11,7 +11,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink(
-  new SubscriptionClient("ws://probable-hagfish-37.hasura.app/v1/graphql", {
+  new SubscriptionClient("wss://probable-hagfish-37.hasura.app/v1/graphql", {
     options: {
       reconnect: true,
       timeout: 30000,
