@@ -6,14 +6,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+html {
+  scroll-behavior: smooth;
+}
+
+.reallyContainer {
+  width: 100%;
   background-color: #232323;
 }
 
 .container {
   display: flex;
 
-  width: 1440px;
+  max-width: 1440px;
   height: 100vh;
   margin: auto;
 }

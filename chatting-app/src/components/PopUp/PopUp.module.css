@@ -1,0 +1,39 @@
+.addIcon {
+  display: inline-block;
+  margin-left: 248px;
+}
+
+.addIcon:hover,
+.searchIcon:hover {
+  cursor: pointer;
+}
+
+.searchIcon {
+  display: inline-block;
+  margin-left: 22px;
+}
+
+.drawerContent {
+  background-color: var(--color-black) !important;
+  color: var(--color-white) !important;
+}
+
+.drawerHeader {
+  background-color: var(--color-green);
+}
+
+.input:focus {
+  border: 1px solid var(--color-white) !important;
+  box-shadow: none !important;
+
+  color: var(--color-white) !important;
+}
+
+.input::placeholder {
+  color: var(--color-white);
+  opacity: 1;
+}
+
+.drawerBody {
+  padding: 0;
+}

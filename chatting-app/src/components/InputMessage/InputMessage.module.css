@@ -1,0 +1,29 @@
+.form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.inputMessage {
+  width: 100%;
+  max-width: 888px;
+  height: 43px;
+  background-color: transparent;
+
+  border: solid 3px var(--color-grey);
+  border-radius: 25px;
+
+  padding-left: 32px;
+  color: var(--color-white);
+}
+
+.inputMessage::placeholder {
+  color: var(--color-grey);
+}
+
+.submit {
+  background-color: transparent;
+  border: none;
+
+  margin-left: 36px;
+}

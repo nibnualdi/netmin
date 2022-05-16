@@ -1,0 +1,82 @@
+.messagesFromUser {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  margin-top: 7px;
+}
+
+.messagesFromFriend {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-top: 7px;
+}
+
+.messageFromUser {
+  position: relative;
+
+  max-width: 564px;
+  min-height: 43px;
+  background-color: var(--color-green);
+  border-radius: 20px;
+
+  font-size: 15px;
+  color: var(--color-white);
+
+  padding: 14px 32px 14px 20px;
+  margin-top: 2px;
+}
+
+.messageFromFriend {
+  position: relative;
+
+  max-width: 564px;
+  min-height: 43px;
+  background-color: var(--color-light-grey);
+  border-radius: 20px;
+
+  font-size: 15px;
+  color: var(--color-white);
+
+  padding: 14px 20px 14px 32px;
+  margin-top: 2px;
+}
+
+.messageFromUser:first-child,
+.messageFromFriend:first-child {
+  margin-top: 0;
+}
+
+.messageFromUser .tail {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-green);
+}
+
+.messageFromFriend .tail {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-light-grey);
+}
+
+.container {
+  background-color: transparent;
+}
+
+.selected {
+  border-radius: 20px;
+  background-color: var(--color-grey);
+  transition: background-color 1s;
+}
