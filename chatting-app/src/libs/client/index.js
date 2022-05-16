@@ -1,6 +1,6 @@
-import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql, split, HttpLink } from "@apollo/client";
-import { SubscriptionClient } from 'subscriptions-transport-ws'
-import { WebSocketLink } from '@apollo/client/link/ws'
+import { ApolloClient, InMemoryCache, split, HttpLink } from "@apollo/client";
+import { SubscriptionClient } from "subscriptions-transport-ws";
+import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 
 const httpLink = new HttpLink({
@@ -17,23 +17,21 @@ const wsLink = new WebSocketLink(
       timeout: 30000,
       connectionParams: {
         headers: {
-          "x-hasura-admin-secret": "yShbtKWAWnde3GJqPSYlMIYHXXZyVCXZcMKkpzLAiE59fboIs40tezdS2xe2LGKC",
+          "x-hasura-admin-secret":
+            "yShbtKWAWnde3GJqPSYlMIYHXXZyVCXZcMKkpzLAiE59fboIs40tezdS2xe2LGKC",
         },
       },
     },
-  }),
+  })
 );
 
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
-    return (
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
-    );
+    return definition.kind === "OperationDefinition" && definition.operation === "subscription";
   },
   wsLink,
-  httpLink,
+  httpLink
 );
 
 const client = new ApolloClient({
@@ -41,4 +39,4 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export default client
+export default client;

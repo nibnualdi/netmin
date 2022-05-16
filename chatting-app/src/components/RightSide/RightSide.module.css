@@ -13,9 +13,6 @@
   height: calc(100% - 170px);
   margin: auto;
   overflow: auto;
-}
-
-.messagesContainer {
   scroll-behavior: smooth;
 }
 
@@ -43,7 +40,6 @@
   font-size: 40px;
 
   background-color: var(--color-black);
-  /* background-image: none; */
 }
 
 .noMessages h1 {

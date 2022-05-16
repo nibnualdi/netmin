@@ -1,10 +1,11 @@
 import styles from "./RightSide.module.css";
 
-// import send from "../../assets/images/icons/send.svg";
+// components
 import { RightHeader } from "../RightHeader";
-import { useEffect } from "react";
 import { Messages } from "../Messages";
 import { InputMessage } from "../InputMessage";
+
+import { useEffect } from "react";
 
 function RightSide({ username, data, getName, dataUserAndFriend }) {
   let dataSingleUser = [];
@@ -14,10 +15,6 @@ function RightSide({ username, data, getName, dataUserAndFriend }) {
     if (eachData.friend.name === username && eachData.user.name === getName)
       return (dataSingleUser = [...dataSingleUser, eachData]);
   });
-
-  // useEffect(() => {
-  //   console.log(dataSingleUser.length === 0);
-  // }, [dataSingleUser]);
 
   useEffect(() => {
     if (document.getElementById("inputMessageContainer")) {

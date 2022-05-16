@@ -23,7 +23,7 @@
   min-height: 43px;
   background-color: var(--color-green);
   border-radius: 20px;
-  
+
   font-size: 15px;
   color: var(--color-white);
 
@@ -46,7 +46,8 @@
   margin-top: 2px;
 }
 
-.messageFromUser:first-child, .messageFromFriend:first-child {
+.messageFromUser:first-child,
+.messageFromFriend:first-child {
   margin-top: 0;
 }
 
@@ -69,9 +70,11 @@
   height: 24px;
   background-color: var(--color-light-grey);
 }
+
 .container {
   background-color: transparent;
 }
+
 .selected {
   border-radius: 20px;
   background-color: var(--color-grey);

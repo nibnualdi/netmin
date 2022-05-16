@@ -1,4 +1,4 @@
-import styles from "./RightHeader.module.css"
+import styles from "./RightHeader.module.css";
 
 export const RightHeader = ({ getName }) => {
   return (

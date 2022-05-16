@@ -1,18 +1,14 @@
-import { useEffect } from "react";
 import styles from "./Messages.module.css";
 
 export const Messages = ({ username, messages }) => {
-
-  if(document.getElementById(window.location.href.split("#")[1])) {
-    document.getElementById(window.location.href.split("#")[1])?.classList.add(styles['selected'])
-    setTimeout(()=>{
-      document.getElementById(window.location.href.split("#")[1]).classList.remove(styles['selected'])
-    }, 3000)
+  if (document.getElementById(window.location.href.split("#")[1])) {
+    document.getElementById(window.location.href.split("#")[1])?.classList.add(styles["selected"]);
+    setTimeout(() => {
+      document
+        .getElementById(window.location.href.split("#")[1])
+        .classList.remove(styles["selected"]);
+    }, 3000);
   }
-
-  useEffect(()=>{
-    console.log(document.getElementById(window.location.href.split("#")[1]))
-  }, [window.location.href])
 
   return (
     <>
@@ -22,7 +18,6 @@ export const Messages = ({ username, messages }) => {
             {message.user.name === username ? (
               <div className={styles.messagesFromUser}>
                 <div className={styles.messageFromUser}>
-                {/* {message.createdAt} */}
                   <div className={styles.tail} />
                   {message.messagesText}
                 </div>
@@ -30,7 +25,6 @@ export const Messages = ({ username, messages }) => {
             ) : (
               <div className={styles.messagesFromFriend} id={message.id}>
                 <div className={styles.messageFromFriend}>
-                {/* {message.createdAt} */}
                   <div className={styles.tail} />
                   {message.messagesText}
                 </div>

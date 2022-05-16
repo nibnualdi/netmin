@@ -92,21 +92,26 @@ export const INPUT_MESSAGE = gql`
 `;
 
 export const CREATE_NEW_USER = gql`
-mutation CreateNewUser($id: String, $name: String, $email: String, $password: String, $userTyping: Boolean = false) {
-  insert_users(objects: {id: $id, name: $name, email: $email, password: $password}) {
-    returning {
-      id
-      name
-      email
+  mutation CreateNewUser(
+    $id: String
+    $name: String
+    $email: String
+    $password: String
+    $userTyping: Boolean = false
+  ) {
+    insert_users(objects: { id: $id, name: $name, email: $email, password: $password }) {
+      returning {
+        id
+        name
+        email
+      }
+    }
+    insert_friends(objects: { name: $name, userId: $id, userTyping: $userTyping }) {
+      returning {
+        id
+        name
+        userId
+      }
     }
   }
-  insert_friends(objects: {name: $name, userId: $id, userTyping: $userTyping}) {
-    returning {
-      id
-      name
-      userId
-    }
-  }
-}
-
 `;

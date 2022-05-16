@@ -10,7 +10,7 @@ import PopUp from "../PopUp";
 import SearchPopUpBody from "../SearchPopUpBody";
 
 import { useEffect, useState } from "react";
-import { useQuery, useSubscription } from "@apollo/client";
+import { useSubscription } from "@apollo/client";
 import { GET_USERS } from "../../libs/client/gql";
 import AddPopUpBody from "../AddPopUpBody";
 
@@ -27,14 +27,12 @@ const LeftSide = ({ messages, setGetName, username, getDataUserAndFriend }) => {
   // this is for add friend name to variable friends from the data given (props messages)
   // if there are match friend name then return the first found friend name and return null for the rest of it
   messages?.forEach((message) => {
-    // console.log(message.user.name)
     if (!friends.includes(message.friend.name)) {
       return (friends = [...friends, message.friend.name]);
-    } 
+    }
     if (username !== message.user.name && !friends.includes(message.user.name)) {
       return (friends = [...friends, message.user.name]);
-    }
-    else {
+    } else {
       return (friends = [...friends, null]);
     }
   });
@@ -59,21 +57,23 @@ const LeftSide = ({ messages, setGetName, username, getDataUserAndFriend }) => {
     });
   };
 
-  // console.log(friends)
-  // console.log(alreadyShown)
-  // useEffect(()=>{console.log(alreadyShown)}, [alreadyShown])
-
   const handleAddUsers = (e) => {
     setUsersFound([]);
     users?.users.forEach((user) => {
-      if (user.name.toLowerCase().includes(e.target.value.toLowerCase())) {
-        return setUsersFound((oldArray) => [...oldArray, user]);
+      if (user.name.toLowerCase() === e.target.value.toLowerCase()) {
+        console.log(usersFound)
+        return setUsersFound([user]);
       }
-      if (user.email.toLowerCase().includes(e.target.value.toLowerCase())) {
-        return setUsersFound((oldArray) => [...oldArray, user]);
+      if (user.email.toLowerCase() === e.target.value.toLowerCase()) {
+        console.log(usersFound)
+        return setUsersFound([user]);
       }
     });
   };
+
+  useEffect(()=>{
+    console.log(usersFound)
+  }, [usersFound])
 
   return (
     <section className={styles.leftSide}>
@@ -85,7 +85,14 @@ const LeftSide = ({ messages, setGetName, username, getDataUserAndFriend }) => {
           users={users?.users}
           inputSearch={inputSearch}
           onChange={handleAddUsers}
-          BodyComponent={<AddPopUpBody username={username} data={usersFound} setGetName={setGetName} getDataUserAndFriend={getDataUserAndFriend} />}
+          BodyComponent={
+            <AddPopUpBody
+              username={username}
+              data={usersFound}
+              setGetName={setGetName}
+              getDataUserAndFriend={getDataUserAndFriend}
+            />
+          }
         />
 
         <PopUp
@@ -94,33 +101,43 @@ const LeftSide = ({ messages, setGetName, username, getDataUserAndFriend }) => {
           name="searchIcon"
           onChange={handleSearch}
           BodyComponent={
-            <SearchPopUpBody username={username} data={messagesFound} inputSearch={inputSearch} setGetName={setGetName} />
+            <SearchPopUpBody
+              username={username}
+              data={messagesFound}
+              inputSearch={inputSearch}
+              setGetName={setGetName}
+            />
           }
         />
       </section>
       <section className={styles.chatsContainer}>
         {messages?.length > 0 &&
           messages?.map((message, index) => {
-            
-            {/* if (!friends.includes(message.user.name) && friends[index] === username) { */}
-            if (friends[index] !== null && message.friend.name === username && !alreadyShown.includes(friends[index])) {
-              alreadyShown = [...alreadyShown, message.user.name]
-                return (
-                  <div key={message.id}>
-                    <Chat
-                      name={message.user.name}
-                      message={message}
-                      getTheFirstFiveWords={getTheFirstFiveWords}
-                      setGetName={setGetName}
-                      username={username}
-                      getDataUserAndFriend={getDataUserAndFriend}
-                    />
-                  </div>
-                );
-              
+            if (
+              friends[index] !== null &&
+              message.friend.name === username &&
+              !alreadyShown.includes(friends[index])
+            ) {
+              alreadyShown = [...alreadyShown, message.user.name];
+              return (
+                <div key={message.id}>
+                  <Chat
+                    name={message.user.name}
+                    message={message}
+                    getTheFirstFiveWords={getTheFirstFiveWords}
+                    setGetName={setGetName}
+                    username={username}
+                    getDataUserAndFriend={getDataUserAndFriend}
+                  />
+                </div>
+              );
             }
-            if (friends[index] !== null && friends[index] !== username && !alreadyShown.includes(friends[index])) {
-              alreadyShown = [...alreadyShown, message.user.name]
+            if (
+              friends[index] !== null &&
+              friends[index] !== username &&
+              !alreadyShown.includes(friends[index])
+            ) {
+              alreadyShown = [...alreadyShown, message.user.name];
               return (
                 <div key={message.id}>
                   <Chat

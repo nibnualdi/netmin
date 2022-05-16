@@ -1,6 +1,13 @@
 import styles from "./Chat.module.css";
 
-const Chat = ({ name, message, getTheFirstFiveWords, setGetName, username, getDataUserAndFriend }) => {
+const Chat = ({
+  name,
+  message,
+  getTheFirstFiveWords,
+  setGetName,
+  username,
+  getDataUserAndFriend,
+}) => {
   let chats = document.getElementsByName("chatContainer");
 
   const handleSelectedChat = (e) => {

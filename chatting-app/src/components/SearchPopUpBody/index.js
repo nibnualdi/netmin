@@ -8,7 +8,15 @@ const SearchPopUpBody = ({ username, data, inputSearch, setGetName }) => {
         const firstSelectedWord = message.messagesText.toLowerCase().match(inputSearch);
 
         return (
-          <a href={`#${message.id}`} key={message.id} onClick={()=>{setGetName(message.friend.name === username ? message.user.name : message.friend.name)}}>
+          <a
+            href={`#${message.id}`}
+            key={message.id}
+            onClick={() => {
+              setGetName(
+                message.friend.name === username ? message.user.name : message.friend.name
+              );
+            }}
+          >
             <div className={styles.container}>
               {message.friend.name === username ? (
                 <h1 className={styles.senderName}>{message.user.name}</h1>

@@ -1,50 +1,69 @@
-import { useLazyQuery, useMutation, useQuery, useSubscription } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import {
   Alert,
   AlertIcon,
   Button,
+  CircularProgress,
   FormControl,
-  FormHelperText,
   FormLabel,
   Input,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { CREATE_NEW_USER, GET_USER_SIGN_UP_VALIDATION } from "../../libs/client/gql";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./SignUpPage.module.css";
-import { useToast } from '@chakra-ui/react'
+import chating from "../../assets/images/chating.svg";
 
 const SignUpPage = () => {
   const uuid = uuidv4();
   let [user, setUser] = useState({ email: "", password: "", name: "" });
-  let [getUSer, { data, loading, error }] = useLazyQuery(GET_USER_SIGN_UP_VALIDATION);
-  let [userExist, setUserExist] = useState(false);
-  let [addUSer] = useMutation(CREATE_NEW_USER, {
-    onCompleted: ()=>{
-      setUserExist(false)
-    }
-  });
+  let [getUSer, { data, loading }] = useLazyQuery(GET_USER_SIGN_UP_VALIDATION);
+  let [addUSer, { data: addUserData, loading: addUserLoading }] = useMutation(CREATE_NEW_USER);
+
+  let [isAlreadyLoad, setIsAlreadyLoad] = useState(false);
+  let [isAlreadySecondLoad, setIsAlreadySecondLoad] = useState(false);
+
   const navigate = useNavigate();
-  const toast = useToast()
+  const toast = useToast();
 
   useEffect(() => {
-    console.log(data);
-    if (data?.users.length === 0) {
+    if (data?.users.length === 0 && isAlreadyLoad) {
       addUSer({
         variables: { id: uuid, email: user.email, password: user.password, name: user.name },
       });
-      navigate("/");
-    } else {
-      console.log(error);
-      setUserExist(true);
     }
   }, [data]);
 
   useEffect(() => {
-    setUserExist(false);
-  }, []);
+    setIsAlreadySecondLoad(true);
+  }, [addUserLoading]);
+
+  useEffect(() => {
+    if (isAlreadySecondLoad) {
+      if (data?.users.length === 0) {
+        toast({
+          title: "Account created.",
+          description: "We've created your account for you.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+        navigate("/");
+      }
+      if (data?.users.length > 0) {
+        toast({
+          title: "Failed.",
+          description: "There is already the same name or email.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    }
+  }, [data]);
 
   const handleInput = (e) => {
     if (e.target.id === "email") {
@@ -60,9 +79,15 @@ const SignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getUSer({
-      variables: { id: uuid, email: user.email, password: user.password, name: user.name },
-    });
+    setIsAlreadyLoad(true);
+    if (user.email && user.password && user.name) {
+      getUSer({
+        variables: {
+          email: user.email.toLowerCase(),
+          name: user.name.toLowerCase(),
+        },
+      });
+    }
   };
 
   return (
@@ -72,81 +97,54 @@ const SignUpPage = () => {
         handleSubmit(e);
       }}
     >
-      {/* {userExist ? (
-        <Stack spacing={3}>
-          <Alert status="error">
-            <AlertIcon />
-            There was an error processing your request
-          </Alert>
-        </Stack>
-      ) : (
-        <Stack spacing={3}>
-          <Alert status="success">
-            <AlertIcon />
-            Account is created
-          </Alert>
-        </Stack>
-      )} */}
-
-      {userExist && (
-        <Stack spacing={3}>
-          <Alert status="error">
-            <AlertIcon />
-            There was an error processing your request
-          </Alert>
-        </Stack>
-      )}
-
       <FormControl className={styles.form}>
-        <FormLabel htmlFor="email" className={styles.formLabel}>
-          Email address
-        </FormLabel>
-        <Input
-          id="email"
-          type="email"
-          className={styles.input}
-          onChange={(e) => {
-            handleInput(e);
-          }}
-        />
-        {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+        <div className={styles.logoContainer}>
+          <img src={chating} alt="logo" className={styles.logo} />
+          <h1 className={styles.signUp}>Sign Up</h1>
+          <p className={styles.desc}>create an account</p>
+        </div>
+        <span className={styles.line} />
+        <div className={styles.formContainer}>
+          <Input
+            id="name"
+            type="text"
+            placeholder="Name"
+            className={styles.input}
+            onChange={(e) => {
+              handleInput(e);
+            }}
+          />
 
-        <FormLabel htmlFor="email" className={styles.formLabel}>
-          Username
-        </FormLabel>
-        <Input
-          id="name"
-          type="text"
-          className={styles.input}
-          onChange={(e) => {
-            handleInput(e);
-          }}
-        />
-        {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+          <Input
+            id="email"
+            type="email"
+            placeholder="Email"
+            className={styles.input}
+            onChange={(e) => {
+              handleInput(e);
+            }}
+          />
 
-        <FormLabel htmlFor="email" className={styles.formLabel}>
-          Password
-        </FormLabel>
-        <Input
-          id="password"
-          type="password"
-          className={styles.input}
-          onChange={(e) => {
-            handleInput(e);
-          }}
-        />
-        {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
-
-        <Button
-          type="submit"
-          size="md"
-          height="48px"
-          width="200px"
-          border="2px"
-          borderColor="green.500"
-        >
-          Create Account
-        </Button>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Password"
+            className={styles.input}
+            onChange={(e) => {
+              handleInput(e);
+            }}
+          />
+          {loading ? (
+            <CircularProgress isIndeterminate color="teal.300" size="30px" />
+          ) : (
+            <Button type="submit" className={styles.button}>
+              Create
+            </Button>
+          )}
+          <Link to="/">
+            <p className={styles.toLogIn}>already have an account?</p>
+          </Link>
+        </div>
       </FormControl>
     </form>
   );
