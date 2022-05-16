@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
-  Button,
   Input,
   Tooltip,
 } from "@chakra-ui/react";
@@ -21,8 +18,8 @@ function PopUp({ icon, placeHolder, name, onChange, BodyComponent }) {
 
   return (
     <>
-      <Tooltip label={placeHolder} fontSize='md'>
-      <img src={icon} alt={name} className={styles[name]} ref={btnRef} onClick={onOpen} />
+      <Tooltip label={placeHolder} fontSize="md">
+        <img src={icon} alt={name} className={styles[name]} ref={btnRef} onClick={onOpen} />
       </Tooltip>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
@@ -36,13 +33,6 @@ function PopUp({ icon, placeHolder, name, onChange, BodyComponent }) {
           </DrawerHeader>
 
           <DrawerBody className={styles.drawerBody}>{BodyComponent}</DrawerBody>
-
-          {/* <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
-          </DrawerFooter> */}
         </DrawerContent>
       </Drawer>
     </>

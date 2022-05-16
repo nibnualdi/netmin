@@ -1,5 +1,36 @@
 import { gql } from "@apollo/client";
 
+export const GET_USER_AND_FRIEND_BY_NAME = gql`
+  query UserAndFriend($username: String, $friendname: String) {
+    users(where: { name: { _eq: $username } }) {
+      id
+      name
+    }
+    friends(where: { name: { _eq: $friendname } }) {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_USER = gql`
+  query User($email: String, $password: String) {
+    users(where: { _and: { email: { _eq: $email }, password: { _eq: $password } } }) {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_USER_SIGN_UP_VALIDATION = gql`
+  query User($email: String, $name: String) {
+    users(where: { _or: [{ name: { _eq: $name } }, { email: { _eq: $email } }] }) {
+      id
+      name
+    }
+  }
+`;
+
 export const GET_USERS = gql`
   subscription AllUsers {
     users {
@@ -37,7 +68,7 @@ export const INPUT_MESSAGE = gql`
   mutation insertMessage(
     $messagesRead: Boolean = false
     $messagesText: String
-    $userId: Int
+    $userId: String
     $friendId: Int
     $createdAt: String
   ) {
@@ -58,4 +89,24 @@ export const INPUT_MESSAGE = gql`
       }
     }
   }
+`;
+
+export const CREATE_NEW_USER = gql`
+mutation CreateNewUser($id: String, $name: String, $email: String, $password: String, $userTyping: Boolean = false) {
+  insert_users(objects: {id: $id, name: $name, email: $email, password: $password}) {
+    returning {
+      id
+      name
+      email
+    }
+  }
+  insert_friends(objects: {name: $name, userId: $id, userTyping: $userTyping}) {
+    returning {
+      id
+      name
+      userId
+    }
+  }
+}
+
 `;

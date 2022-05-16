@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { Messages } from "../Messages";
 import { InputMessage } from "../InputMessage";
 
-function RightSide({ username, data, getName }) {
+function RightSide({ username, data, getName, dataUserAndFriend }) {
   let dataSingleUser = [];
 
   data?.forEach((eachData) => {
@@ -16,21 +16,41 @@ function RightSide({ username, data, getName }) {
   });
 
   // useEffect(() => {
-  //   console.log(sortedActivities);
-  // }, [sortedActivities]);
+  //   console.log(dataSingleUser.length === 0);
+  // }, [dataSingleUser]);
+
+  useEffect(() => {
+    if (document.getElementById("inputMessageContainer")) {
+      return (document.getElementById("inputMessageContainer").scrollTop =
+        document.getElementById("inputMessageContainer").scrollHeight);
+    }
+  }, [getName]);
 
   return (
-    <section className={styles.rightSide}>
-      <RightHeader getName={getName} />
+    <>
+      {getName ? (
+        <section className={styles.rightSide}>
+          <RightHeader getName={getName} />
 
-      <section className={styles.messagesContainer}>
-        <Messages username={username} messages={dataSingleUser} />
-      </section>
+          <section id="inputMessageContainer" className={styles.messagesContainer}>
+            <Messages username={username} messages={dataSingleUser} />
+          </section>
 
-      <section className={styles.inputMessageContainer}>
-        <InputMessage data={data} getName={getName} />
-      </section>
-    </section>
+          <section className={styles.inputMessageContainer}>
+            <InputMessage
+              data={data}
+              getName={getName}
+              username={username}
+              dataUserAndFriend={dataUserAndFriend}
+            />
+          </section>
+        </section>
+      ) : (
+        <section className={`${styles.rightSide} ${styles.noMessages}`}>
+          <h1>There is no message to show</h1>
+        </section>
+      )}
+    </>
   );
 }
 

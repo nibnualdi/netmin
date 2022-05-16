@@ -1,10 +1,12 @@
 .form {
+  width: 100%;
   display: flex;
   align-items: center;
 }
 
 .inputMessage {
-  width: 888px;
+  width: 100%;
+  max-width: 888px;
   height: 43px;
   background-color: transparent;
 

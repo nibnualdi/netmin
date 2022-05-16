@@ -1,16 +1,22 @@
 .rightSide {
   position: relative;
-  width: 1090px;
+  width: 100%;
+  max-width: 1090px;
   height: 100vh;
   background-color: #2d2d2a;
   background-image: url("../../assets/images/pattern.png");
 }
 
 .messagesContainer {
-  width: 888px;
-  height: calc(100% - 150px);
+  width: 100%;
+  max-width: 888px;
+  height: calc(100% - 170px);
   margin: auto;
   overflow: auto;
+}
+
+.messagesContainer {
+  scroll-behavior: smooth;
 }
 
 .inputMessageContainer {
@@ -26,6 +32,23 @@
   background-color: var(--color-black);
 
   padding-left: 66px;
+}
+
+.noMessages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--color-white);
+  font-size: 40px;
+
+  background-color: var(--color-black);
+  /* background-image: none; */
+}
+
+.noMessages h1 {
+  max-width: 400px;
+  text-align: center;
 }
 
 /* scrollbar */

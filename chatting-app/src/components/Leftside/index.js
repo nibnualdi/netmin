@@ -14,7 +14,7 @@ import { useQuery, useSubscription } from "@apollo/client";
 import { GET_USERS } from "../../libs/client/gql";
 import AddPopUpBody from "../AddPopUpBody";
 
-const LeftSide = ({ messages, setGetName, username }) => {
+const LeftSide = ({ messages, setGetName, username, getDataUserAndFriend }) => {
   let [usersFound, setUsersFound] = useState([]);
   let { data: users, loading: loadingUsers, error: errorUsers } = useSubscription(GET_USERS);
 
@@ -27,9 +27,14 @@ const LeftSide = ({ messages, setGetName, username }) => {
   // this is for add friend name to variable friends from the data given (props messages)
   // if there are match friend name then return the first found friend name and return null for the rest of it
   messages?.forEach((message) => {
+    // console.log(message.user.name)
     if (!friends.includes(message.friend.name)) {
       return (friends = [...friends, message.friend.name]);
-    } else {
+    } 
+    if (username !== message.user.name && !friends.includes(message.user.name)) {
+      return (friends = [...friends, message.user.name]);
+    }
+    else {
       return (friends = [...friends, null]);
     }
   });
@@ -54,6 +59,10 @@ const LeftSide = ({ messages, setGetName, username }) => {
     });
   };
 
+  // console.log(friends)
+  // console.log(alreadyShown)
+  // useEffect(()=>{console.log(alreadyShown)}, [alreadyShown])
+
   const handleAddUsers = (e) => {
     setUsersFound([]);
     users?.users.forEach((user) => {
@@ -76,7 +85,7 @@ const LeftSide = ({ messages, setGetName, username }) => {
           users={users?.users}
           inputSearch={inputSearch}
           onChange={handleAddUsers}
-          BodyComponent={<AddPopUpBody username={username} data={usersFound} />}
+          BodyComponent={<AddPopUpBody username={username} data={usersFound} setGetName={setGetName} getDataUserAndFriend={getDataUserAndFriend} />}
         />
 
         <PopUp
@@ -85,7 +94,7 @@ const LeftSide = ({ messages, setGetName, username }) => {
           name="searchIcon"
           onChange={handleSearch}
           BodyComponent={
-            <SearchPopUpBody username={username} data={messagesFound} inputSearch={inputSearch} />
+            <SearchPopUpBody username={username} data={messagesFound} inputSearch={inputSearch} setGetName={setGetName} />
           }
         />
       </section>
@@ -93,19 +102,25 @@ const LeftSide = ({ messages, setGetName, username }) => {
         {messages?.length > 0 &&
           messages?.map((message, index) => {
             
-           
-                {/* return (
+            {/* if (!friends.includes(message.user.name) && friends[index] === username) { */}
+            if (friends[index] !== null && message.friend.name === username && !alreadyShown.includes(friends[index])) {
+              alreadyShown = [...alreadyShown, message.user.name]
+                return (
                   <div key={message.id}>
                     <Chat
                       name={message.user.name}
                       message={message}
                       getTheFirstFiveWords={getTheFirstFiveWords}
                       setGetName={setGetName}
+                      username={username}
+                      getDataUserAndFriend={getDataUserAndFriend}
                     />
                   </div>
-                ); */}
+                );
               
+            }
             if (friends[index] !== null && friends[index] !== username && !alreadyShown.includes(friends[index])) {
+              alreadyShown = [...alreadyShown, message.user.name]
               return (
                 <div key={message.id}>
                   <Chat
@@ -113,6 +128,8 @@ const LeftSide = ({ messages, setGetName, username }) => {
                     message={message}
                     getTheFirstFiveWords={getTheFirstFiveWords}
                     setGetName={setGetName}
+                    username={username}
+                    getDataUserAndFriend={getDataUserAndFriend}
                   />
                 </div>
               );

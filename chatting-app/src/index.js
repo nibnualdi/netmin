@@ -3,18 +3,21 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { extendTheme, ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { ApolloProvider } from "@apollo/client";
 import client from "./libs/client/index";
 import { theme } from "./chakraUiCustomStyle/theme";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <ChakraProvider resetCSS theme={theme}>
-        <App />
-      </ChakraProvider>
-    </ApolloProvider>
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <ChakraProvider resetCSS theme={theme}>
+          <App />
+        </ChakraProvider>
+      </ApolloProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

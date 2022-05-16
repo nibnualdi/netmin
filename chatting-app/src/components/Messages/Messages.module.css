@@ -20,7 +20,7 @@
   position: relative;
 
   max-width: 564px;
-  height: 43px;
+  min-height: 43px;
   background-color: var(--color-green);
   border-radius: 20px;
   
@@ -68,4 +68,12 @@
   width: 24px;
   height: 24px;
   background-color: var(--color-light-grey);
+}
+.container {
+  background-color: transparent;
+}
+.selected {
+  border-radius: 20px;
+  background-color: var(--color-grey);
+  transition: background-color 1s;
 }

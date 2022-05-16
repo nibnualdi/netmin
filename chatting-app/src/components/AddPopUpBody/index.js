@@ -1,17 +1,18 @@
 import styles from "./AddPopUpBody.module.css";
 
-const AddPopUpBody = ({ data, username }) => {
+const AddPopUpBody = ({ data, username, setGetName, getDataUserAndFriend }) => {
   return (
     <>
       {data.map(
         (singgleData) =>
           singgleData.name !== username && (
             <div
-              id={singgleData.id}
+              id={singgleData.name}
               key={singgleData.id}
               className={`${styles.container}`}
               onClick={(e) => {
-                console.log(e.currentTarget.id);
+                setGetName(singgleData.name);
+                getDataUserAndFriend({ variables: { username, friendname: singgleData.name } });
               }}
             >
               <div className={styles.profileInitial}>{singgleData?.name[0].toUpperCase()}</div>

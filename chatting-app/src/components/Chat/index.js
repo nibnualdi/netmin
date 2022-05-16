@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
 import styles from "./Chat.module.css";
 
-const Chat = ({ name, message, getTheFirstFiveWords, setGetName }) => {
-  let [selected, setSelected] = useState(false);
+const Chat = ({ name, message, getTheFirstFiveWords, setGetName, username, getDataUserAndFriend }) => {
   let chats = document.getElementsByName("chatContainer");
 
   const handleSelectedChat = (e) => {
-    const senderName = e.currentTarget.children[1].children[0].getAttribute("title")
+    const senderName = e.currentTarget.children[1].children[0].getAttribute("title");
     chats.forEach((e) => {
       e.classList.remove(`${styles.selected}`);
     });
     e.currentTarget.classList.toggle(`${styles.selected}`);
-    setGetName(e.currentTarget.children[1].children[0].getAttribute("title"));
+    setGetName(senderName);
+    getDataUserAndFriend({ variables: { username, friendname: senderName } });
   };
 
   return (
     <div
       name="chatContainer"
-      isselected={selected.toString()}
       className={`${styles.chatContainer}`}
       onClick={(e) => {
         handleSelectedChat(e);
