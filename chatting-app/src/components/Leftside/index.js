@@ -9,7 +9,7 @@ import Chat from "../Chat";
 import PopUp from "../PopUp";
 import SearchPopUpBody from "../SearchPopUpBody";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSubscription } from "@apollo/client";
 import { GET_USERS } from "../../libs/client/gql";
 import AddPopUpBody from "../AddPopUpBody";
@@ -70,10 +70,6 @@ const LeftSide = ({ messages, setGetName, username, getDataUserAndFriend }) => {
       }
     });
   };
-
-  useEffect(()=>{
-    console.log(usersFound)
-  }, [usersFound])
 
   return (
     <section className={styles.leftSide}>

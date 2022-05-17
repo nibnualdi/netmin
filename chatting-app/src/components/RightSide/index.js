@@ -5,7 +5,7 @@ import { RightHeader } from "../RightHeader";
 import { Messages } from "../Messages";
 import { InputMessage } from "../InputMessage";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function RightSide({ username, data, getName, dataUserAndFriend }) {
   let dataSingleUser = [];
@@ -21,7 +21,7 @@ function RightSide({ username, data, getName, dataUserAndFriend }) {
       return (document.getElementById("inputMessageContainer").scrollTop =
         document.getElementById("inputMessageContainer").scrollHeight);
     }
-  }, [getName]);
+  }, [getName, data]);
 
   return (
     <>
