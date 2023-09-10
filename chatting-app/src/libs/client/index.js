@@ -4,21 +4,21 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 
 const httpLink = new HttpLink({
-  uri: "https://probable-hagfish-37.hasura.app/v1/graphql",
+  uri: process.env.REACT_APP_URI,
   headers: {
-    "x-hasura-admin-secret": "yShbtKWAWnde3GJqPSYlMIYHXXZyVCXZcMKkpzLAiE59fboIs40tezdS2xe2LGKC",
+    "x-hasura-admin-secret": process.env.REACT_APP_X_HASURA_ADMIN_SECRET_HEDEARS,
   },
 });
 
 const wsLink = new WebSocketLink(
-  new SubscriptionClient("wss://probable-hagfish-37.hasura.app/v1/graphql", {
+  new SubscriptionClient(process.env.REACT_APP_WEB_SOCKET, {
     options: {
       reconnect: true,
       timeout: 30000,
       connectionParams: {
         headers: {
           "x-hasura-admin-secret":
-            "yShbtKWAWnde3GJqPSYlMIYHXXZyVCXZcMKkpzLAiE59fboIs40tezdS2xe2LGKC",
+            process.env.REACT_APP_X_HASURA_ADMIN_SECRET_HEDEARS,
         },
       },
     },
