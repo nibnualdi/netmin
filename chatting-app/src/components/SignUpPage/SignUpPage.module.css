@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   height: 100vh;
+  padding: 10px;
   background-image: url("../../assets/images/pattern.png");
   background-color: var(--color-black);
   
@@ -108,4 +109,34 @@
   font-size: 12px;
   color: var(--color-white);
   opacity: 25%;
+}
+
+
+
+@media screen and (max-width: 1099px) {
+  .line {
+    display: none;
+  }
+
+  .form {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .line {
+    display: none;
+  }
+
+  .form {
+    padding: 60px;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .signUp {
+    font-size: 20px;
+  }
 }
