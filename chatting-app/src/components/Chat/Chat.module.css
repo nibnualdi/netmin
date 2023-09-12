@@ -73,9 +73,10 @@
 .line {
   position: absolute;
   bottom: 5px;
-  right: 39px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  width: 223px;
+  width: 80%;
   border-bottom: solid 1px rgba(227, 227, 227, 0.1);
 }
 
