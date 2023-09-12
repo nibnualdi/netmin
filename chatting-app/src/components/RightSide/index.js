@@ -12,10 +12,6 @@ function RightSide({ username, data, getName, setGetName, dataUserAndFriend }) {
   const [mediaQuery] = useMediaQuery("(min-width: 768px)");
   let dataSingleUser = [];
 
-  useEffect(()=>{
-    console.log(mediaQuery)
-  }, [mediaQuery])
-
   data?.forEach((eachData) => {
     if (eachData.friend.name === getName) return (dataSingleUser = [...dataSingleUser, eachData]);
     if (eachData.friend.name === username && eachData.user.name === getName)
