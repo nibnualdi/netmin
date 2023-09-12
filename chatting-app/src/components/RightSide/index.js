@@ -6,9 +6,15 @@ import { Messages } from "../Messages";
 import { InputMessage } from "../InputMessage";
 
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@chakra-ui/react";
 
-function RightSide({ username, data, getName, dataUserAndFriend }) {
+function RightSide({ username, data, getName, setGetName, dataUserAndFriend }) {
+  const [mediaQuery] = useMediaQuery("(min-width: 768px)");
   let dataSingleUser = [];
+
+  useEffect(()=>{
+    console.log(mediaQuery)
+  }, [mediaQuery])
 
   data?.forEach((eachData) => {
     if (eachData.friend.name === getName) return (dataSingleUser = [...dataSingleUser, eachData]);
@@ -26,8 +32,8 @@ function RightSide({ username, data, getName, dataUserAndFriend }) {
   return (
     <>
       {getName ? (
-        <section className={styles.rightSide}>
-          <RightHeader getName={getName} />
+        <section className={mediaQuery ? styles.rightSide : `${styles.absolute} ${styles.rightSide}`}>
+          <RightHeader getName={getName} setGetName={setGetName} />
 
           <section id="inputMessageContainer" className={styles.messagesContainer}>
             <Messages username={username} messages={dataSingleUser} />
@@ -43,9 +49,15 @@ function RightSide({ username, data, getName, dataUserAndFriend }) {
           </section>
         </section>
       ) : (
-        <section className={`${styles.rightSide} ${styles.noMessages}`}>
-          <h1>There is no message to show</h1>
-        </section>
+        <>
+          {
+            mediaQuery && (
+              <section className={`${styles.rightSide} ${styles.noMessages}`}>
+                <h1>There is no message to show</h1>
+              </section>
+            )
+          }
+        </>
       )}
     </>
   );

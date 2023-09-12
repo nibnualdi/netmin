@@ -8,9 +8,12 @@ import {
   useDisclosure,
   Input,
   Tooltip,
+  Image,
 } from "@chakra-ui/react";
 
 import styles from "./PopUp.module.css";
+
+import close from "../../assets/images/icons/close.svg";
 
 function PopUp({ icon, placeHolder, name, onChange, BodyComponent }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,6 +33,7 @@ function PopUp({ icon, placeHolder, name, onChange, BodyComponent }) {
               className={styles.input}
               onChange={(e) => onChange(e)}
             />
+            <Image src={close} onClick={onClose} />
           </DrawerHeader>
 
           <DrawerBody className={styles.drawerBody}>{BodyComponent}</DrawerBody>

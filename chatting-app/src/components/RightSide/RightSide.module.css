@@ -7,6 +7,10 @@
   background-image: url("../../assets/images/pattern.png");
 }
 
+.absolute {
+  position: absolute;
+}
+
 .messagesContainer {
   width: 100%;
   max-width: 888px;
@@ -28,7 +32,8 @@
   height: 94px;
   background-color: var(--color-black);
 
-  padding-left: 66px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .noMessages {

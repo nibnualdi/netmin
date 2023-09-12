@@ -6,6 +6,12 @@
   padding: 12px 53px;
 }
 
+.back {
+  position: absolute;
+  left: 20px;
+  top: 22px;
+}
+
 .profile {
   display: flex;
   align-items: center;

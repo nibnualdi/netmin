@@ -44,6 +44,7 @@ function ChatAppPage() {
             username={userName}
             data={sortedActivities}
             getName={getName}
+            setGetName={setGetName}
             dataUserAndFriend={dataUserAndFriend}
           />
         </div>

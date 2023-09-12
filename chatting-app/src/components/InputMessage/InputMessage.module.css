@@ -2,6 +2,8 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .inputMessage {
@@ -25,5 +27,5 @@
   background-color: transparent;
   border: none;
 
-  margin-left: 36px;
+  /* margin-left: 36px; */
 }

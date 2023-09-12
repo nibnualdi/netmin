@@ -11,7 +11,12 @@
   max-height: 72px;
   background-color: var(--color-green);
 
-  padding-top: 23px;
+  padding-right: 23px;
+
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 22px;
 }
 
 .chatsContainer {
@@ -40,3 +45,10 @@
   background: var(--color-cream);
 }
 /* scrollbar */
+
+
+@media screen and (max-width: 768px) {
+  .leftSide {
+    max-width: 100%;
+  }
+}

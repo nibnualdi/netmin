@@ -1,6 +1,5 @@
 .addIcon {
   display: inline-block;
-  margin-left: 248px;
 }
 
 .addIcon:hover,
@@ -10,7 +9,6 @@
 
 .searchIcon {
   display: inline-block;
-  margin-left: 22px;
 }
 
 .drawerContent {
@@ -20,6 +18,9 @@
 
 .drawerHeader {
   background-color: var(--color-green);
+
+  display: flex;
+  gap: 10px;
 }
 
 .input:focus {
