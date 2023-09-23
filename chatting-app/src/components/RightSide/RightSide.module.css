@@ -16,6 +16,8 @@
   max-width: 888px;
   height: calc(100% - 170px);
   margin: auto;
+  padding-left: 20px;
+  padding-right: 15px;
   overflow: auto;
   scroll-behavior: smooth;
 }

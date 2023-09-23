@@ -14,7 +14,7 @@
   padding-right: 23px;
 
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: center;
   gap: 22px;
 }
