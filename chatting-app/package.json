@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.1",
+    "@capacitor/android": "^5.4.1",
+    "@capacitor/core": "^5.4.1",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -46,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.0",
+    "@capacitor/cli": "^5.4.1"
   }
 }
