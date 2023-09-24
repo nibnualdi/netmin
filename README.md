@@ -1,6 +1,6 @@
 # Netmin (Chatting App)
 
-This project was made by react js.
+This project was made by react js & capacitor (android).
 
 ## Here is the demo
 Visit link [here](https://netmin.netlify.app/). And get the apk [here](./android/app/release) or go to android/app/release folder and download the app-release.apk
